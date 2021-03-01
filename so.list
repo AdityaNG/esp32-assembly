@@ -1,0 +1,181 @@
+
+so.elf:     file format elf32-xtensa-le
+
+
+Disassembly of section .init:
+
+40100000 <_start>:
+40100000:	001385        	call0	4010013c <notmain>
+	...
+
+40100100 <dummy>:
+40100100:	f00d      	ret.n
+	...
+
+40100110 <PUT32>:
+40100110:	0020c0        	memw
+40100113:	0239      	s32i.n	a3, a2, 0
+40100115:	f00d      	ret.n
+	...
+
+40100120 <GET32>:
+40100120:	0020c0        	memw
+40100123:	0228      	l32i.n	a2, a2, 0
+40100125:	f00d      	ret.n
+
+Disassembly of section .literal:
+
+40100128 <.literal>:
+40100128:	38 08 00 60 	
+4010012c:	10 03 00 60 	
+40100130:	04 03 00 60 	
+40100134:	80 1a 06 00 	
+40100138:	08 03 00 60 	
+
+Disassembly of section .text:
+
+4010013c <notmain>:
+4010013c:	004136        	entry	a1, 32
+4010013f:	fffa21        	l32r	a2, 40100128 <GET32+0x8>
+40100142:	440c      	movi.n	a4, 4
+40100144:	02ad      	mov.n	a10, a2
+40100146:	fffda5        	call8	40100120 <GET32>
+40100149:	cfaeb2        	movi	a11, 0xfffffecf
+4010014c:	10bab0        	and	a11, a10, a11
+4010014f:	02ad      	mov.n	a10, a2
+40100151:	fffbe5        	call8	40100110 <PUT32>
+40100154:	fff6a1        	l32r	a10, 4010012c <GET32+0xc>
+40100157:	4b0c      	movi.n	a11, 4
+40100159:	fffb65        	call8	40100110 <PUT32>
+4010015c:	fff561        	l32r	a6, 40100130 <GET32+0x10>
+4010015f:	fff531        	l32r	a3, 40100134 <GET32+0x14>
+40100162:	fff551        	l32r	a5, 40100138 <GET32+0x18>
+40100165:	04bd      	mov.n	a11, a4
+40100167:	06ad      	mov.n	a10, a6
+40100169:	fffa65        	call8	40100110 <PUT32>
+4010016c:	020c      	movi.n	a2, 0
+4010016e:	02ad      	mov.n	a10, a2
+40100170:	221b      	addi.n	a2, a2, 1
+40100172:	fff8e5        	call8	40100100 <dummy>
+40100175:	f59237        	bne	a2, a3, 4010016e <notmain+0x32>
+40100178:	04bd      	mov.n	a11, a4
+4010017a:	20a550        	or	a10, a5, a5
+4010017d:	fff925        	call8	40100110 <PUT32>
+40100180:	020c      	movi.n	a2, 0
+40100182:	02ad      	mov.n	a10, a2
+40100184:	221b      	addi.n	a2, a2, 1
+40100186:	fff7a5        	call8	40100100 <dummy>
+40100189:	f59237        	bne	a2, a3, 40100182 <notmain+0x46>
+4010018c:	fff546        	j	40100165 <notmain+0x29>
+
+Disassembly of section .xtensa.info:
+
+00000000 <.xtensa.info>:
+   0:	000c      	movi.n	a0, 0
+   2:	200000        	or	a0, a0, a0
+   5:	000000        	ill
+   8:	000001        	l32r	a0, fffc0008 <notmain+0xbfebfecc>
+   b:	745800        	extui	a5, a0, 8, 8
+   e:	736e65        	call8	736f4 <_start-0x4008c90c>
+  11:	495f61        	l32r	a6, fffd2590 <notmain+0xbfed2454>
+  14:	6e          	.byte 0x6e
+  15:	006f66        	bnei	a15, 6, 19 <_start-0x400fffe7>
+  18:	455355        	call4	45550 <_start-0x400baab0>
+  1b:	5f          	.byte 0x5f
+  1c:	534241        	l32r	a4, fffd4d24 <notmain+0xbfed4be8>
+  1f:	4f          	.byte 0x4f
+  20:	554c      	movi.n	a5, 69
+  22:	5f4554        	lsi	f5, a5, 0x17c
+  25:	494c      	movi.n	a9, 68
+  27:	524554        	lsi	f5, a5, 0x148
+  2a:	534c41        	l32r	a4, fffd4d5c <notmain+0xbfed4c20>
+  2d:	303d      	lsi	f3, a0, 0
+  2f:	410a      	add.n	a4, a1, a0
+  31:	3d4942        	s8i	a4, a9, 61
+  34:	000a30        	lsi	f3, a10, 0
+	...
+
+Disassembly of section .xt.prop:
+
+00000000 <.xt.prop>:
+   0:	100000        	and	a0, a0, a0
+   3:	000640        	lsi	f4, a6, 0
+   6:	020000        	andb	b0, b0, b0
+   9:	0088      	l32i.n	a8, a0, 0
+   b:	010000        	slli	a0, a0, 32
+   e:	024010        	andb	b4, b0, b1
+  11:	000000        	ill
+  14:	000002        	l8ui	a0, a0, 0
+  17:	010200        	slli	a0, a2, 32
+  1a:	004010        	break	0, 1
+  1d:	000000        	ill
+  20:	4808      	l32i.n	a0, a8, 16
+  22:	100000        	and	a0, a0, a0
+  25:	401001        	l32r	a0, fffd0068 <notmain+0xbfecff2c>
+  28:	000007        	bnone	a0, a0, 2c <_start-0x400fffd4>
+  2b:	000200        	lsi	f0, a2, 0
+  2e:	170000        	lsi	f0, a0, 92
+  31:	401001        	l32r	a0, fffd0074 <notmain+0xbfecff38>
+  34:	000000        	ill
+  37:	480800        	ssx	f0, a8, a0
+  3a:	200000        	or	a0, a0, a0
+  3d:	401001        	l32r	a0, fffd0080 <notmain+0xbfecff44>
+  40:	000007        	bnone	a0, a0, 44 <_start-0x400fffbc>
+  43:	000200        	lsi	f0, a2, 0
+  46:	270000        	lsi	f0, a0, 156
+  49:	401001        	l32r	a0, fffd008c <notmain+0xbfecff50>
+  4c:	000000        	ill
+  4f:	000800        	lsi	f0, a8, 0
+  52:	280000        	lsi	f0, a0, 160
+  55:	401001        	l32r	a0, fffd0098 <notmain+0xbfecff5c>
+  58:	000014        	lsi	f1, a0, 0
+  5b:	000100        	lsi	f0, a1, 0
+  5e:	3c0000        	lsi	f0, a0, 240
+  61:	401001        	l32r	a0, fffd00a4 <notmain+0xbfecff68>
+  64:	000000        	ill
+  67:	280400        	lsi	f0, a4, 160
+  6a:	3c0000        	lsi	f0, a0, 240
+  6d:	401001        	l32r	a0, fffd00b0 <notmain+0xbfecff74>
+  70:	000032        	l8ui	a3, a0, 0
+  73:	000200        	lsi	f0, a2, 0
+  76:	6e0000        	f64rnd	a0, a0, a0, 2
+  79:	401001        	l32r	a0, fffd00bc <notmain+0xbfecff80>
+  7c:	000014        	lsi	f1, a0, 0
+  7f:	002200        	lsi	f0, a2, 0
+  82:	820000        	mull	a0, a0, a0
+  85:	401001        	l32r	a0, fffd00c8 <notmain+0xbfecff8c>
+  88:	000d      	mov.n	a0, a0
+  8a:	220000        	orb	b0, b0, b0
+  8d:	000000        	ill
+  90:	8f          	.byte 0x8f
+  91:	401001        	l32r	a0, fffd00d4 <notmain+0xbfecff98>
+  94:	000000        	ill
+  97:	000800        	lsi	f0, a8, 0
+	...
+
+Disassembly of section .comment:
+
+00000000 <.comment>:
+   0:	434347        	ball	a3, a4, 47 <_start-0x400fffb9>
+   3:	203a      	add.n	a2, a0, a3
+   5:	6328      	l32i.n	a2, a3, 24
+   7:	736f72        	s32i	a7, a15, 0x1cc
+   a:	6f7473        	lsi	f7, a4, 0x1bc
+   d:	6f          	.byte 0x6f
+   e:	2d6c      	movi.n	a13, -30
+  10:	4e          	.byte 0x4e
+  11:	652047        	blt	a0, a4, 7a <_start-0x400fff86>
+  14:	2d7073        	lsi	f7, a0, 180
+  17:	323032        	lsi	f3, a0, 200
+  1a:	327230        	orbc	b7, b2, b3
+  1d:	2029      	s32i.n	a2, a0, 8
+  1f:	2e38      	l32i.n	a3, a14, 8
+  21:	302e32        	l32i	a3, a14, 192
+	...
+
+Disassembly of section .xt.lit:
+
+00000000 <.xt.lit>:
+   0:	0128      	l32i.n	a2, a1, 0
+   2:	144010        	extui	a4, a1, 0, 2
+   5:	000000        	ill
